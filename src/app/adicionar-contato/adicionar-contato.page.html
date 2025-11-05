@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Adicionar Contato</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input type="text" formControlName="name" required></ion-input>
+      </ion-item>
+      <div class="validation-error" *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['required']">
+        Nome é obrigatório
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Telefone</ion-label>
+        <ion-input type="tel" formControlName="phone" required></ion-input>
+      </ion-item>
+      <div class="validation-error" *ngIf="contactForm.get('phone')?.touched && contactForm.get('phone')?.errors?.['required']">
+        Telefone é obrigatório
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" formControlName="email" required></ion-input>
+      </ion-item>
+      <div class="validation-error" *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.errors?.['required']">
+        Email é obrigatório
+      </div>
+      <div class="validation-error" *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.errors?.['email']">
+        Email inválido
+      </div>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" [disabled]="!contactForm.valid">
+        <ion-icon name="save-outline" slot="start"></ion-icon>
+        Salvar Contato
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
